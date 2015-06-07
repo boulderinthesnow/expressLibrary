@@ -36,21 +36,11 @@ app.get("/:id", function(req, res) {
 	})
 })
 
-// app.delete("/:id/edit", function(req, res){
-// 	books.forEach(function(book){
-// 		if (book.id === Number(req.params.id)) {
-// 			console.log(Number(req.params.id, "FOOOOOOOO"));
-// 			// res.render("show", {book:book})
-// 		}
-// 	})
-// 	res.redirect("/");
-// })
 
-app.get("/:id/edit", function(req, res) {
+app.get("/edit/:id", function(req, res) {
 	books.forEach(function(book){
 		if (book.id === Number(req.params.id)) {
 			TempGlobalId = Number(req.params.id)
-			var thisBook = book
 			res.render("edit", {id:req.params.id, book:book});
 		}
 	})
@@ -68,14 +58,18 @@ app.put("/putItOut", function(req, res) {
 	res.redirect("/")
 })
 
-
+app.delete("/delete/:id", function(req, res) {
 	books.forEach(function(book){
 		if (book.id === Number(req.params.id)) {
-			book.title = req.body.title
-			book.author = req.body.author
-			book.year = req.body.year
+			var index = books.indexOf(book)
+			books.splice(index,1);
 		}
 	})
+	res.redirect("/")
+})
+
+
+
 
 
 app.listen(3000, function(){
