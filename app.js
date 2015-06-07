@@ -1,7 +1,7 @@
 var express = require("express"),
 	app = express(),
-	bodyParser = require("body-parser"),
-	methodOverride = require("method-override");
+	bodyParser = require("body-parser"), // post
+	methodOverride = require("method-override"); // post
 
 var books = [],
 	id = 1;
@@ -22,7 +22,7 @@ app.post("/new", function(req, res) {
 	book.year = req.body.year;
 	book.id = id;
 	id++
-	books.push(book)
+	books.push(book);
 	console.log(books);
 
 	res.redirect("/");
@@ -36,9 +36,46 @@ app.get("/:id", function(req, res) {
 	})
 })
 
+// app.delete("/:id/edit", function(req, res){
+// 	books.forEach(function(book){
+// 		if (book.id === Number(req.params.id)) {
+// 			console.log(Number(req.params.id, "FOOOOOOOO"));
+// 			// res.render("show", {book:book})
+// 		}
+// 	})
+// 	res.redirect("/");
+// })
+
+app.get("/:id/edit", function(req, res) {
+	books.forEach(function(book){
+		if (book.id === Number(req.params.id)) {
+			TempGlobalId = Number(req.params.id)
+			var thisBook = book
+			res.render("edit", {id:req.params.id, book:book});
+		}
+	})
+	
+})
+
+app.put("/putItOut", function(req, res) {
+	books.forEach(function(book){
+		if (book.id === TempGlobalId) {
+			book.title = req.body.title
+			book.author = req.body.author
+			book.year = req.body.year
+		}
+	})
+	res.redirect("/")
+})
 
 
-
+	books.forEach(function(book){
+		if (book.id === Number(req.params.id)) {
+			book.title = req.body.title
+			book.author = req.body.author
+			book.year = req.body.year
+		}
+	})
 
 
 app.listen(3000, function(){

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>edit me</title>
+</head>
+<body>
+
+	<h1>EDIT YO SHIZNIT!!</h1>
+	<form method="POST" action="/putItOut?_method=put">
+		<input type="text" name="title" id="title" value="<%= book.title %>">
+		<input type="text" name="author" id="author" value="<%= book.author %>">
+		<input type="text" name="year" id="year" value="<%= book.year %>">
+		<!-- <input type="text" name="id" id="id" value="<%= book.id %>"> -->
+		
+		<input type="submit" value="submit">
+	</form>
+	<h1>
+		<%= book.title %>
+	</h1>	
+</body>
+</html>
